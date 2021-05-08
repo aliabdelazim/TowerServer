@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>Socket.IO</title>
+  <style>
+    * { margin: 30; padding: 10; box-sizing: border-box; }
+    body { font: 13px Helvetica, Arial; }
+ </style>
+</head>
+
+<body>
+  <div id="towers">
+  </div>
+
+  <script src="http://localhost:8000/socket.io/socket.io.js">
+  </script>
+  <script>
+    const socket = io("http://localhost:8000");
+    const Towers = document.getElementById('towers');
+
+    socket.on('a tower have been added', function (msgs) {
+      console.log(msgs)
+      const p = document.createElement('p');
+      p.textContent = msgs.name + "had been added to the DB";
+      Towers.append(p);
+    });
+    socket.on('a tower have been updated', function (msgs) {
+      console.log(msgs)
+      const p = document.createElement('p');
+      p.textContent = msgs.name + "had been added to the DB";
+      Towers.append(p);
+    });
+    socket.on('a tower have been deleted', function (msgs) {
+      console.log(msgs)
+      const p = document.createElement('p');
+      p.textContent =  "Tower With Id:" + msgs + "had been added to the DB";
+      Towers.append(p);
+    });
+  </script>
+</body>
+
+</html>
